@@ -10,8 +10,52 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <ul class="tab clearfix">
+        <li class="active">関東</li>
+        <li>関西</li>
+        <li>九州</li>
+      </ul>
+       
+      <!-- コンテンツ
+       全体を非表示にし、showクラスが付いたコンテンツのみ表示 -->
+      <div class="area">
+        <ul class="show">
+          <li>東京</li>
+          <li>新宿</li>
+          <li>横浜</li>
+        </ul>
+        <ul>
+          <li>梅田</li>
+          <li>難波</li>
+          <li>三宮</li>
+        </ul>
+        <ul>
+          <li>小倉</li>
+          <li>博多</li>
+          <li>久留米</li>
+        </ul>
+      </div>      
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
+$(function() {
+ 
+ // ①タブをクリックしたら発動
+ $('.tab li').click(function() {
+
+   // ②クリックされたタブの順番を変数に格納
+   var index = $('.tab li').index(this);
+
+   // ③クリック済みタブのデザインを設定したcssのクラスを一旦削除
+   $('.tab li').removeClass('active');
+
+   // ④クリックされたタブにクリック済みデザインを適用する
+   $(this).addClass('active');
+
+   // ⑤コンテンツを一旦非表示にし、クリックされた順番のコンテンツのみを表示
+   $('.area ul').removeClass('show').eq(index).addClass('show');
+
+ });
+});
 </script>
 </body>
 </html>
