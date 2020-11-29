@@ -1,25 +1,21 @@
-.tab {
-    border-bottom: 3px solid #fb4343;
-  }
-.tab li {
-color: #333;
-float: left;
-margin: 0 10px -1px 0;
-padding: 10px 20px;
-border: 1px solid #fb4343;
-cursor: pointer;
-list-style: none;
-transition: .3s;
-}
-.tab li.active {
-color: #fff;
-background: #fb4343;
-cursor: auto;
+.slider .slide {
+    width: 498px;
+    height: 198px;
+    border: 1px solid #f00;
+    float: left;
 }
 
-.area ul {
-display: none;
+.slider .slideSet {
+    /* width: 2500px; */
 }
-.area ul.show {
-display: block;
+
+.slider {
+    width: 500px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;  
+  }
+   
+.slider .slideSet {
+position: absolute;
 }
