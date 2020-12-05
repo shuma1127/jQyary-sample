@@ -1,21 +1,14 @@
-.slider .slide {
-    width: 498px;
-    height: 198px;
-    border: 1px solid #f00;
-    float: left;
+#msg
+{
+	text-align: center;
 }
-
-.slider .slideSet {
-    /* width: 2500px; */
-}
-
-.slider {
-    width: 500px;
-    height: 200px;
-    overflow: hidden;
-    position: relative;  
-  }
-   
-.slider .slideSet {
-position: absolute;
+#box 
+{
+	background-color: #eee;
+	height: 300px;
+	width: 80%;
+	display: block;
+	border: 1px solid #999;
+	margin-right: auto;
+	margin-left: auto;
 }
