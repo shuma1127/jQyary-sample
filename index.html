@@ -9,121 +9,55 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div id="msg"></div>
-    <div id="box"></div>
+	<ul id="card"></ul>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
-$(document).ready(function()
-{
-	/** ①初期メッセージ出力 */
-	$("#msg").text("スマホで下の枠を指でスワイプしてください");
- 
-	/** ②指が触れたか検知 */
-	$("#box").on("touchstart", start_check);
- 
-	/** ③指が動いたか検知 */
-	$("#box").on("touchmove", move_check);
- 
-	/** ④指が離れたか検知 */
-	$("#box").on("touchend", end_check);
- 
-	/** 変数宣言 */
-	var moveY,modeX, posiY, posiX;
- 
- 
-	// ⑤タッチ開始時の処理
-	function start_check(event) 
-	{
-		/** 現在の座標取得 */
-		posiY = getY(event);
-		posiX = getX(event);
- 
-		/** 移動距離状態を初期化 */
-		moveY = '';
-		moveX = '';
- 
-		/** 表示メッセージを初期化 */
-		msgY = '';
-		msgX = '';
-	}
- 
-	// ⑥スワイプ中の処理
-	function move_check(event)
-	{
-		if (posiX - getX(event) > 70) // 70px以上移動でスワイプと判断
-		{
-			/** 右→左と判断 */
-			moveX = "left";
-		}
-		else if (posiX - getX(event) < -70)  // 70px以上移動でスワイプと判断
-		{
-			/** 左→右と判断 */			
-			moveX = "right";
-		}
- 
-		if (posiY - getY(event) > 70) // 70px以上移動でスワイプと判断
-		{
-			/** 下→上と判断 */
-			moveY = "top";
-		}
-		else if (posiY - getY(event) < -70)  // 70px以上移動でスワイプと判断
-		{
-			/** 上→下と判断 */			
-			moveY = "bottom";
-		}
-	}
- 
-	// ⑦指が離れた時の処理
-	function end_check(event)
-	{
-		if (moveX == "left")
-		{
-			msgX = "左へ移動";
-		}
-		else if (moveX == "right")
-		{
-			msgX = "右へ移動";
-		}
-		else
-		{
-			msgX = "移動なし";
-		}
- 
- 
-		if (moveY == "top")
-		{
-			msgY = "上へ移動";
-		}
-		else if (moveY == "bottom")
-		{
-			msgY = "下へ移動";
-		}
-		else
-		{
-			msgY = "移動なし";
-		}
- 
- 
-		$("#msg").text("（横移動）"+msgX+":"+"（縦移動）"+msgY);
- 
-	}
- 
- 
-	// 座標取得処理
-	function getY(event) 
-	{
-		//縦方向の座標を取得
-		return (event.originalEvent.touches[0].pageY);
-	}
- 
-	function getX(event) 
-	{
-		//横方向の座標を取得
-		return (event.originalEvent.touches[0].pageX);
-	}
- 
- 
+var total = 10;    //カードの枚数
+var isFirst = true;    //1枚目か判定
+var card1 = "";    //array_cardsのindex（1枚目）
+var card2 = "";    //array_cardsのindex（2枚目）
+var array_cards = [];    //カードに表示する数値を格納する配列
+//カードに表示する数値を生成
+//array_cards = [1,1,2,2,3,3,4,4,5,5]となる）
+for(i=1; i <= total/2; i++) {
+  array_cards.push(i,i);
+}
+//array_cards配列の数値をランダムに並び替える
+array_cards.sort(function() {
+  return Math.random() - Math.random();
 });
+//ulに空のli要素を追加
+for(i=0; i < total; i++) {
+  $("#card").append("<li></li>");  
+}
+//li要素をクリックした際の処理
+$("#card li").on("click",function(){
+  //1枚目の場合は、全li要素のテキストを空にする
+  if(isFirst){
+    $("#card li").text("");
+  }
+  //li要素のindexを取得
+  var index = $(this).index();
+  
+  //li要素のindexと同じindexであるarray_cards配列の値を表示する
+  $(this).text(array_cards[index]);
+    
+  if(isFirst){
+    //１枚目
+    card1 = index;
+    isFirst = false;
+  }else{
+    //2枚目
+    card2 = index;
+    //1枚目と2枚目の値が同じ場合はli要素の背景色を赤にする
+    if(array_cards[card1] === array_cards[card2]){
+      $("#card li").eq(card1).css("background-color","red");
+      $("#card li").eq(card2).css("background-color","red");
+    }
+    isFirst = true;    
+  }  
+});
+
 </script>
 </body>
 </html>

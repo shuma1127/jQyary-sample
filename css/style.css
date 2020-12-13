@@ -1,14 +1,14 @@
-#msg
-{
-	text-align: center;
+#card{
+  list-style: none;
 }
-#box 
-{
-	background-color: #eee;
-	height: 300px;
-	width: 80%;
-	display: block;
-	border: 1px solid #999;
-	margin-right: auto;
-	margin-left: auto;
+#card li{
+  margin: 5px;
+  width: 30px;
+  height: 50px;
+  float: left;
+  border:solid 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
